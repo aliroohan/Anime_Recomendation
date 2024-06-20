@@ -5,6 +5,7 @@ from tkinter import ttk
 
 df = pd.read_csv('anime-dataset-2023.csv')
 
+df = df[(df["Rating"] != "Rx - Hentai") & (df["Genres"] != "Hentai")]
 print(df.columns)
 types = df['Type'].unique()
 types = list(types)
@@ -46,7 +47,8 @@ def on_button_click():
 
 root = tk.Tk()
 root.title("Tkinter Drop-down Example")
-root.geometry("300x300")
+root.geometry("500x700")
+
 
 # Define the options for the drop-down menus
 options = ["Option 1", "Option 2", "Option 3", "Option 4"]
