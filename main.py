@@ -23,7 +23,6 @@ source.remove("Unknown")
 print(source)
 
 df.sort_values('Score', ascending=False, inplace=True)
-df = df[["Name", 'Genres']]
 genere = df['Genres'].unique()
 genere = list(genere)
 genere.remove("UNKNOWN")
@@ -39,10 +38,16 @@ print(genre)
 # print(df.shape)
 
 def on_button_click():
-    print("Option 1:", combo1.get())
-    print("Option 2:", combo2.get())
-    print("Option 3:", combo3.get())
-    print("Option 4:", combo4.get())
+    type = combo1.get()
+    rating = combo2.get()
+    source = combo3.get()
+    genre = combo4.get()
+
+    df2 = df[(df["Type"] == type) & (df["Rating"] == rating) & (df["Source"] == source) & (df["Genres"].str.contains(genre))]
+    df2 = df2.sort_values('Score', ascending=False)
+    print(df2.shape)
+    df2 = df2[["Name", "Synopsis"]]
+    print(df2.head(20))
 
 
 root = tk.Tk()
@@ -84,3 +89,9 @@ button.pack(pady=20)
 
 # Run the application
 root.mainloop()
+
+
+# an other frame to display recomended anime
+root2 = tk.Tk()
+root2.title("Recomended Anime")
+root2.geometry("500x700")
